@@ -8,7 +8,12 @@
 <body>
 
 <?php
-$nameErr = $qualityErr = $idErr = $priceERR = "";
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(E_ALL);
+
+
+$nameErr = $qualityErr = $idErr = $priceErr = "";
 $name = $quality = $id = $price = $info = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -31,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 
 	if (empty($_POST["price"])) {
-		$priceERR = "Price is required";
+		$priceErr = "Price is required";
 	} else {
 		$price = test_input($_POST["price"]);
 	}
@@ -58,12 +63,13 @@ function test_input($data) {
 function add($i_id, $i_name, $i_quality, $i_price, $i_info){
 
 	$servername = "localhost";
-	$username = "username";
-	$password = "suzuki14";
-	$dbname = "main";
+	$username = "admin";
+	$password = "esp8266";
+	$dbname = "EF";
 
-	//Create connection
+	// Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);
+
 	
 	// Check connection
 	if ($conn->connect_error) {
@@ -71,7 +77,7 @@ function add($i_id, $i_name, $i_quality, $i_price, $i_info){
 	}
 	
 $sql = "INSERT INTO products (`id`, `name`, `quality`, `price`, `info`, `sold`)
-VALUES('$i_id', '$i_name', '$i_quality', '$i_price', '$i_info', '0')";
+VALUES('$i_id', '$i_name', '$i_quality', '$i_price', '$i_info', b'0')";
 	if ($conn->query($sql) === TRUE) {
 		echo "succesful";
 	} else {
@@ -83,7 +89,6 @@ VALUES('$i_id', '$i_name', '$i_quality', '$i_price', '$i_info', '0')";
 
 	}
 
-
 ?>
 
 <h2>Tilføj Vare</h2>
@@ -91,7 +96,7 @@ VALUES('$i_id', '$i_name', '$i_quality', '$i_price', '$i_info', '0')";
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
 	ID: <input type=text name="id">
-	<span class="error">* <?php echo $idERR;?></span>
+	<span class="error">* <?php echo $idErr;?></span>
 	<br><br>
 	Navn: <input type="text" name="name">
 	<span class="error">* <?php echo $nameErr;?></span>
