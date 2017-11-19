@@ -11,7 +11,14 @@
 		die("Conenction failed: " . $conn->connect_error);
 	}
 
-	$sql = "SELECT * FROM products";
+	if (isset($_GET['c'])){
+	$sql = "SELECT * FROM products WHERE category='".$_GET['c']."' AND sold != b'1'";
+	}
+	else
+	{
+	$sql = "SELECT * FROM products WHERE sold != b'1'";
+	}
+
 	$result=$conn->query($sql);
 
 
@@ -21,14 +28,14 @@
 		//echo "Quality: ".$row['quality']."<br>";
 		//echo "Price: " .$row['price']."<br><br>";
 
-		$desc="Quality: ".$row['quality']."<br>Price: ".$row['price']."<br> Info: ".$row['info'];
+		$desc="Info: ".$row['info']."<br>Kvalitet: ".$row['quality']."<br>ID: ".$row['id'];
 
 		echo "
    <div class='col-sm-4'> 
       <div class='panel panel-primary'>
         <div class='panel-heading'>".$row['name']."</div>
-        <div class='panel-body'><img src='https://placehold.it/150x80?text=IMAGE' class='img-responsive' style='width:100%' alt='Image'></div>
-        <div class='panel-footer'>".$desc."</div>
+        <div class='panel-body'>".$desc."</div>
+        <div class='panel-footer'>".$row['price'].",-</div>
       </div>
     </div>
 		";

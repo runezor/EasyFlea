@@ -25,7 +25,11 @@ if($result->num_rows==1){
 	session_start();
 	$_SESSION['loggedin'] = true;
 	$_SESSION['username'] = $username;
-	echo "Sucess!";
+
+	//Redirects
+	$url = "/add.php";
+	header('Location: ' . $url, true, false ? 301 : 302);
+	exit(); 
 }
 else
 {

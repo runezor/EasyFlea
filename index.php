@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Photocare Randers Brugtvarer</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
+	/* Adds custom colors*/
+	.panel-primary > .panel-heading {
+		background-image: none;
+		background-color: #1e7a38;
+		color: white;
+	}
+
     /* Remove the navbar's default rounded borders and increase the bottom margin */ 
     .navbar {
       margin-bottom: 50px;
@@ -15,10 +22,18 @@
     }
     
     /* Remove the jumbotron's default bottom margin */ 
+    /* Fixes color as well*/
      .jumbotron {
       margin-bottom: 0;
-    }
-   
+	background-color: #1e7a38;
+	text-color: red;
+   }
+	.jumbotron h1 {
+		color: white;
+	}   
+	.jumbotron p {
+		color: white;
+	}
     /* Add a gray background color and some padding to the footer */
     footer {
       background-color: #f2f2f2;
@@ -30,8 +45,8 @@
 
 <div class="jumbotron">
   <div class="container text-center">
-    <h1>Online Store</h1>      
-    <p>Mission, Vission & Values</p>
+    <h1>Photocare Randers</h1>      
+    <p>Brugtvarer</p>
   </div>
 </div>
 
@@ -43,19 +58,26 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">Logo</a>
+      <a class="navbar-brand" href="?">Brugt</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Products</a></li>
-        <li><a href="#">Deals</a></li>
-        <li><a href="#">Stores</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
+	<?php
+	//Creates category navbar
+	include('categories.php');
+	
+	while($row = $result-> fetch_assoc()){
+		$descN="<li><a href='?c=".$row['id']."'>".$row['name']."</a></li>";
+		echo $descN;
+	}
+	
+	?>
+	
+        
+
+	</ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+        <li><a href="login.html"><span class="glyphicon glyphicon-user"></span> Login</a></li>
       </ul>
     </div>
   </div>
@@ -70,11 +92,8 @@
 </div><br><br>
 
 <footer class="container-fluid text-center">
-  <p>Online Store Copyright</p>  
-  <form class="form-inline">Get deals:
-    <input type="email" class="form-control" size="50" placeholder="Email Address">
-    <button type="button" class="btn btn-danger">Sign Up</button>
-  </form>
+  <p>Adresse: Brødregade 4, 8900 Randers C</p> 
+  <p>Åbent hverdage 10:00-17:30 Fredag 10:00-18:00 Lørdag 10:00-14:00</p>  
 </footer>
 
 </body>
