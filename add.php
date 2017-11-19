@@ -8,6 +8,8 @@
 <body>
 
 <?php
+session_start();
+
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
 error_reporting(E_ALL);
@@ -48,7 +50,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 
 	if ($idErr == "" && $priceErr == "" && $nameErr == "" && $qualityErr == ""){
+		if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
 		add($id, $name, $quality, $price, $info);
+		}
+		else
+		{
+		echo "Please log in";
+		}
+
 	}
 
 }
