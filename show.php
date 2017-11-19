@@ -1,8 +1,5 @@
 	<?php
-	$servername = "localhost";
-	$username = "admin";
-	$password = "esp8266";
-	$dbname = "EF";
+	include('dblogin.php');
 
 	//Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);
@@ -27,13 +24,26 @@
 		//echo "Name: ".$row['name']."<br>";
 		//echo "Quality: ".$row['quality']."<br>";
 		//echo "Price: " .$row['price']."<br><br>";
+		
+		//Laver flotte infoer
+		
+		if (isset($row['info']) && $row['info']!=""){
+			$info=$row['info']."<br><br>";
+		}
+		else{
+			$info="";
+		}
 
-		$desc="Info: ".$row['info']."<br>Kvalitet: ".$row['quality']."<br>ID: ".$row['id'];
+		$desc="".$info."Kvalitet: ".$row['quality']."";
 
 		echo "
    <div class='col-sm-4'> 
       <div class='panel panel-primary'>
-        <div class='panel-heading'>".$row['name']."</div>
+        <div class='panel-heading'>
+		<div class='pull-left'>".$row['name']."</div>
+		<div class='pull-right'>".$row['id']."#</div>
+		<div class='clearfix'></div>
+	</div>
         <div class='panel-body'>".$desc."</div>
         <div class='panel-footer'>".$row['price'].",-</div>
       </div>

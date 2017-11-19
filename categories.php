@@ -1,9 +1,6 @@
 	<?php
 
-	$servername = "localhost";
-	$username = "admin";
-	$password = "esp8266";
-	$dbname = "EF";
+	include('dblogin.php');
 	
 	//Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);

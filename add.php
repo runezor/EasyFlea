@@ -15,6 +15,16 @@ ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
 error_reporting(E_ALL);
 
+//Sikrer login
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']==TRUE)
+{
+}
+else
+{
+header("location: login.html");
+die();
+}
+
 
 $nameErr = $qualityErr = $idErr = $priceErr = $categoryErr = "";
 $name = $quality = $id = $price = $info = $category = "";
@@ -86,10 +96,7 @@ function test_input($data) {
 
 function add($i_id, $i_name, $i_quality, $i_price, $i_info, $i_category, $i_sold,$edit){
 
-	$servername = "localhost";
-	$username = "admin";
-	$password = "esp8266";
-	$dbname = "EF";
+	include('dblogin.php');
 
 	// Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);
@@ -133,7 +140,7 @@ VALUES('$i_id', '$i_name', '$i_quality', '$i_price', '$i_info', '$i_category', b
 
 Find tidligere vare:
 <form method="post" action="<?php include('editAdd.php')?>">
-ID: <input type="text" name="id">
+ID: <input type="text" name="id_toedit">
 <input type="submit" value="Indlæs">
 </form>
 
@@ -142,7 +149,7 @@ ID: <input type="text" name="id">
 
 <h2>Tilføj Vare</h2>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
-	ID: <input type=text name="id" value="<?php echo $edit_id; ?>">
+	ID: <input type="text" name="id" value="<?php echo $edit_id; ?>">
 	<span class="error">* <?php echo $idErr;?></span>
 	<br><br>
 	Navn: <input type="text" name="name" value="<?php echo $edit_name; ?>">
