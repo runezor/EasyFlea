@@ -1,36 +1,31 @@
 <?php
-ini_set('display_errors', 1);
+//Sikrer login
+session_start();
 
-include('dblogin.php');
-$tbl_name="EF_members";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-$username=$_POST['username'];
-$password=$_POST['password'];
-
-$username=stripslashes($username);
-$password=stripslashes($password);
-//$username=mysql_real_escape_string($username);
-//$password=mysql_real_escape_string($password);
-$sql="SELECT * FROM $tbl_name WHERE username='$username' and password='$password'";
-$result=$conn->query($sql);
-
-
-
-if($result->num_rows==1){
-	session_start();
-	$_SESSION['loggedin'] = true;
-	$_SESSION['username'] = $username;
-
-	//Redirects
-	$url = "add.php";
-	header('Location: ' . $url, true, false ? 301 : 302);
-	exit(); 
-}
-else
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']==TRUE)
 {
-	echo "Failed login";
+header("location: menu.php");
+die();
 }
 
 ?>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Login Form</title>
+</head>
+<body>
+  <section class="container">
+    <div class="login">
+      <h1>Login</h1>
+      <form method="post" action="loginPost.php">
+        <p><input type="text" name="username" value="" placeholder="Username"></p>
+        <p><input type="password" name="password" value="" placeholder="Password"></p>
+
+        <p class="submit"><input type="submit" name="commit" value="Login"></p>
+      </form>
+    </div>
+</body>
+</html>

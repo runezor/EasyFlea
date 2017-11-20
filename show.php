@@ -34,7 +34,13 @@
 			$info="";
 		}
 
-		$desc="".$info."Kvalitet: ".$row['quality']."";
+		if (file_exists("uploads/".$row['id'].".jpg")){
+			$img="<img src='uploads/".$row['id'].".jpg' class='img_responsive' style='width:100%'><br>";
+		} else{
+			$img="";
+		}
+
+		$desc=$img."".$info."Kvalitet: ".$row['quality']."";
 
 		echo "
    <div class='col-sm-4'> 

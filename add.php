@@ -18,8 +18,8 @@ die();
 
 
 $nameErr = $qualityErr = $idErr = $priceErr = $categoryErr = "";
-$name = $quality = $id = $price = $info = $category = "";
-$edit_id = $edit_name = $edit_price = $edit_quality = $edit_category = $edit_info = "";
+$name = $quality = $id = $price = $info = $category = $imgurl = "";
+$edit_id = $edit_name = $edit_price = $edit_quality = $edit_category = $edit_info = $edit_imgurl = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (empty($_POST["name"])) {
@@ -64,6 +64,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$sold=test_input($_POST["sold"]);
 	}
 
+	if(isset($_FILES['fileToUpload']['size'])==NULL){
+		echo "nay";
+	} else {
+		include("upload.php");
+		echo "yay";
+	}
 
 	if ($idErr == "" && $priceErr == "" && $nameErr == "" && $qualityErr == "" && $categoryErr == "" ){
 		if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
@@ -121,6 +127,8 @@ VALUES('$i_id', '$i_name', '$i_quality', '$i_price', '$i_info', '$i_category', b
 
 
 	$conn->close();
+	
+	echo "<a href='menu.php' class='btn btn-default'>Tilbage</a>";
 
 	}
 
@@ -128,6 +136,12 @@ VALUES('$i_id', '$i_name', '$i_quality', '$i_price', '$i_info', '$i_category', b
 <!DOCTYPE HTML>
 <html>
 <head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</header>
 <style>
 .error {color : #FF0000;}
 </style>
@@ -146,7 +160,7 @@ ID: <input type="text" name="id_toedit">
 <hr>
 
 <h2>Tilføj Vare</h2>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
+<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" enctype="multipart/form-data">
 	ID: <input type="text" name="id" value="<?php echo $edit_id; ?>">
 	<span class="error">* <?php echo $idErr;?></span>
 	<br><br>
@@ -172,6 +186,8 @@ ID: <input type="text" name="id_toedit">
 	</select>
 	<br><br>
 	Info: <input type="text" name="info" value="<?php echo $edit_info;?>">
+	<br><br>
+	Billede: <input type="file" name="fileToUpload" id="fileToUpload">
 	<br><br>
 	Solgt: <input type="checkbox" name="sold" value="1">
 	<br><br>

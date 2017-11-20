@@ -1,0 +1,61 @@
+<? include('add
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+.error {color : #FF0000;}
+</style>
+</head>
+<body>
+<h2>Karls: Brugtsystem 10000</h2>
+<p><span class="error">*Skal skrives-</span></p>
+
+Find tidligere vare:
+<form method="post" action="<?php include('editAdd.php')?>">
+ID: <input type="text" name="id_toedit">
+<input type="submit" value="Indlæs">
+</form>
+
+<br>
+<hr>
+
+<h2>Tilføj Vare</h2>
+<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" enctype="multipart/form-data">
+	ID: <input type="text" name="id" value="<?php echo $edit_id; ?>">
+	<span class="error">* <?php echo $idErr;?></span>
+	<br><br>
+	Navn: <input type="text" name="name" value="<?php echo $edit_name; ?>">
+	<span class="error">* <?php echo $nameErr;?></span>
+	<br><br>
+	Pris: <input type="text" name="price" value="<?php echo $edit_price;?>">
+	<span class="error">* <?php echo $priceErr;?></span>
+	<br><br>
+	Kvalitet: <input type="text" name="quality" value="<?php echo $edit_quality;?>">
+	<span class="error">* <?php echo $qualityErr;?></span>
+	<br><br>
+	Kategori: <select name="category">
+	<?php
+	//Laver kategorier
+	include('categories.php');
+	
+	while($row = $result-> fetch_assoc()){
+	$desc="<option value='".$row['id']."'>".$row['name']."</option>";
+	echo $desc;
+	}
+	?>
+	</select>
+	<br><br>
+	Info: <input type="text" name="info" value="<?php echo $edit_info;?>">
+	<br><br>
+	Billede: <input type="file" name="fileToUpload" id="fileToUpload">
+	<br><br>
+	Solgt: <input type="checkbox" name="sold" value="1">
+	<br><br>
+	<input type="submit" name="submit" value="Tilføj">
+	<input type="submit" name="submit_edit" value="Rediger">
+
+</form>
+
+</body>
+</html>
