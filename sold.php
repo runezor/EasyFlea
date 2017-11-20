@@ -31,7 +31,7 @@ if ($conn->connect_error){
 	die("Connection failed: ". $conn->connect_error);
 }
 
-$sql = "SELECT * FROM products";
+$sql = "SELECT * FROM EF_products";
 $result=$conn->query($sql);
 
 while($row = $result -> fetch_assoc()){

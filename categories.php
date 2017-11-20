@@ -1,4 +1,5 @@
 	<?php
+ini_set('display_errors', 1);
 
 	include('dblogin.php');
 	
@@ -9,7 +10,7 @@
 		die("Conenction failed: " . $conn->connect_error);
 	}
 
-	$sql = "SELECT * FROM categories";
+	$sql = "SELECT * FROM EF_categories";
 	$result=$conn->query($sql);
 
 

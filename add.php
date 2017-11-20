@@ -1,12 +1,3 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<style>
-.error {color : #FF0000;}
-</style>
-</head>
-<body>
-
 <?php
 
 session_start();
@@ -108,7 +99,7 @@ function add($i_id, $i_name, $i_quality, $i_price, $i_info, $i_category, $i_sold
 	}
 	
 	if ($edit){
-	$sql = "UPDATE products
+	$sql = "UPDATE EF_products
 SET name='$i_name',
 quality='$i_quality',
 price='$i_price',
@@ -118,7 +109,7 @@ sold=b'$i_sold'
 WHERE id = '$i_id'";
 	}
 	else{
-	$sql = "INSERT INTO products (`id`, `name`, `quality`, `price`, `info`, `category`, `sold`)
+	$sql = "INSERT INTO EF_products (`id`, `name`, `quality`, `price`, `info`, `category`, `sold`)
 VALUES('$i_id', '$i_name', '$i_quality', '$i_price', '$i_info', '$i_category', b'$i_sold')";
 	}	
 
@@ -134,7 +125,14 @@ VALUES('$i_id', '$i_name', '$i_quality', '$i_price', '$i_info', '$i_category', b
 	}
 
 ?>
-
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+.error {color : #FF0000;}
+</style>
+</head>
+<body>
 <h2>Karls: Brugtsystem 10000</h2>
 <p><span class="error">*Skal skrives-</span></p>
 

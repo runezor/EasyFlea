@@ -9,11 +9,11 @@
 	}
 
 	if (isset($_GET['c'])){
-	$sql = "SELECT * FROM products WHERE category='".$_GET['c']."' AND sold != b'1'";
+	$sql = "SELECT * FROM EF_products WHERE category='".$_GET['c']."' AND sold != b'1'";
 	}
 	else
 	{
-	$sql = "SELECT * FROM products WHERE sold != b'1'";
+	$sql = "SELECT * FROM EF_products WHERE sold != b'1'";
 	}
 
 	$result=$conn->query($sql);

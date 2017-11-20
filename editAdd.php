@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	}
 
 	
-	$sql = "SELECT * FROM products WHERE id='".$_POST["id_toedit"]."'";
+	$sql = "SELECT * FROM EF_products WHERE id='".$_POST["id_toedit"]."'";
 	$result=$conn->query($sql);
 	
 

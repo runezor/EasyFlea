@@ -1,13 +1,10 @@
 <?php
 ini_set('display_errors', 1);
 
-$host="localhost";
-$username="admin";
-$password="esp8266";
-$db_name="EF";
-$tbl_name="members";
+include('dblogin.php');
+$tbl_name="EF_members";
 
-$conn = new mysqli($host,$username,$password,$db_name);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 $username=$_POST['username'];
 $password=$_POST['password'];
@@ -27,7 +24,7 @@ if($result->num_rows==1){
 	$_SESSION['username'] = $username;
 
 	//Redirects
-	$url = "/add.php";
+	$url = "add.php";
 	header('Location: ' . $url, true, false ? 301 : 302);
 	exit(); 
 }
