@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$edit_price=$row['price'];
 	$edit_quality=$row['quality'];
 	$edit_info=$row['info'];
-
+	$edit_category=$row['category'];
 	if ($row['imghide']==1){
 		$edit_imghide="checked";
 	}

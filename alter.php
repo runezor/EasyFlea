@@ -101,9 +101,9 @@ function add($i_id, $i_name, $i_quality, $i_price, $i_info, $i_category, $i_sold
 	}
 	
 	if ($edit){
-	$sql = "INSERT INTO EF_products (id, name, quality, price, info, sold,imghide)
-VALUES('$i_id','$i_name','$i_quality','$i_price','$i_info',b'$i_sold',b'$i_imghide') ON DUPLICATE KEY UPDATE
-name='$i_name', quality='$i_quality', price='$i_price', info='$i_info', sold=b'$i_sold', imghide=b'$i_imghide'";
+	$sql = "INSERT INTO EF_products (id, name, category, quality, price, info, sold,imghide)
+VALUES('$i_id','$i_name','$i_category','$i_quality','$i_price','$i_info',b'$i_sold',b'$i_imghide') ON DUPLICATE KEY UPDATE
+name='$i_name', category='$i_category' ,quality='$i_quality', price='$i_price', info='$i_info', sold=b'$i_sold', imghide=b'$i_imghide'";
 	}
 	else{
 	//Tillader specielle id'er	

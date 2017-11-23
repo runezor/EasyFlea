@@ -17,7 +17,7 @@ die();
 }
 
 
-$edit_id = $edit_name = $edit_price = $edit_quality = $edit_category = $edit_info = $edit_imgurl = $edit_imghide = "";
+$edit_id = $edit_name = $edit_price = $edit_quality = $edit_category = $edit_info = $edit_imgurl = $edit_imghide = $edit_category = "";
 
 ?>
 <!DOCTYPE HTML>
@@ -59,7 +59,14 @@ ID: <input type="text" name="id_edit">
 	include('categories.php');
 	
 	while($row = $result-> fetch_assoc()){
-	$desc="<option value='".$row['id']."'>".$row['name']."</option>";
+
+	//Vælger selected:
+	if ($row['id']!=$edit_category){
+		$desc="<option value='".$row['id']."'>".$row['name']."</option>";
+	} else{
+		$desc="<option selected='selected' value='".$row['id']."'>".$row['name']."</option>";
+	}
+	
 	echo $desc;
 	}
 	?>
