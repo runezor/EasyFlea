@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	}
 
 	
-	$sql = "SELECT * FROM EF_products WHERE id='".$_POST["id_toedit"]."'";
+	$sql = "SELECT * FROM EF_products WHERE id='".$_POST["id_edit"]."'";
 	$result=$conn->query($sql);
 	
 
@@ -20,6 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$edit_price=$row['price'];
 	$edit_quality=$row['quality'];
 	$edit_info=$row['info'];
+
+	if ($row['imghide']==1){
+		$edit_imghide="checked";
+	}
+	else{
+		$edit_imghide="";
+	}
 	}
 	
 	}

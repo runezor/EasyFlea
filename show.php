@@ -8,12 +8,13 @@
 		die("Conenction failed: " . $conn->connect_error);
 	}
 
+
 	if (isset($_GET['c'])){
-	$sql = "SELECT * FROM EF_products WHERE category='".$_GET['c']."' AND sold != b'1'";
+	$sql = "SELECT * FROM EF_products WHERE category='".$_GET['c']."' AND sold != b'1' ORDER BY `imghide`, `id`";
 	}
 	else
 	{
-	$sql = "SELECT * FROM EF_products WHERE sold != b'1'";
+	$sql = "SELECT * FROM EF_products WHERE sold != b'1' ORDER BY `imghide`, `id`";
 	}
 
 	$result=$conn->query($sql);
@@ -34,7 +35,7 @@
 			$info="";
 		}
 
-		if (file_exists("uploads/".$row['id'].".jpg")){
+		if (file_exists("uploads/".$row['id'].".jpg") && $row['imghide']==0){
 			$img="<img src='uploads/".$row['id'].".jpg' class='img_responsive' style='width:100%'><br>";
 		} else{
 			$img="";

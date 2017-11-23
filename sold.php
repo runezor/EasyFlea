@@ -31,6 +31,7 @@ die();
 <th>Kvalitet</th>
 <th>Beskrivelse</th>
 <th>Pris</th>
+<th>Billede</th>
 <th>Solgt</th>
 <?php
 include('dblogin.php');
@@ -44,7 +45,7 @@ $sql = "SELECT * FROM EF_products";
 $result=$conn->query($sql);
 
 while($row = $result -> fetch_assoc()){
-	$desc = "<tr><th>".$row['id']."</th><th>".$row['name']."</th><th>".$row['category']."</th><th>".$row['quality']."</th><th>".$row['info']."</th><th>".$row['price']."</th><th>".$row['sold']."</th></tr>";
+	$desc = "<tr><th>".$row['id']."</th><th>".$row['name']."</th><th>".$row['category']."</th><th>".$row['quality']."</th><th>".$row['info']."</th><th>".$row['price']."</th><th>".$row['imghide']."</th><th>".$row['sold']."</th></tr>";
 	echo $desc;
 }
 
